@@ -1,0 +1,35 @@
+[project]
+name = "ensiRNA-webui"
+version = "0.1.0"
+description = "ENsiRNA Gradio Web UI"
+authors = ["SilenWang"]
+channels = ["pypi", "nvidia", "bioconda"]
+platforms = ["linux-64"]
+
+[dependencies]
+python = "3.11.*"
+numpy = "*"
+pandas = "*"
+openpyxl = "*"
+tqdm = "*"
+gradio = "4.*"
+pydantic = "2.*"
+biopython = "*"
+
+[dependencies.cuda]
+version = "12.*"
+channel = "nvidia"
+
+[pypi-dependencies]
+torch = { version = "2.*", index = "https://download.pytorch.org/whl/cu121" }
+fair-esm = "*"  # fm package
+# rdkit for ENsiRNA-mod
+rdkit = "*"
+
+[environments]
+default = { solve-group = "default" }
+cuda = { solve-group = "cuda", features = ["cuda"] }
+
+[tasks]
+start = "python webui/app.py"
+dev = "python webui/app.py --share"
